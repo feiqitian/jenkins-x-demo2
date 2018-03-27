@@ -43,7 +43,6 @@ pipeline {
         steps {
           container('maven') {
             // ensure we're not on a detached head
-            sh "rm ~/git/credentials"
             sh "git checkout master"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
             sh "git config credential.helper store --file=~/git/credentials"
