@@ -47,7 +47,7 @@ pipeline {
             sh "git checkout master"
             sh "git config credential.https://github.com.username \$GIT_USERNAME"
             sh "ls -lash ~/*"
-            echo "$GIT_API_TOKEN"
+            sh "cat ~/credentials"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
             sh "git config --global credential.helper store"
             // so we can retrieve the version in later steps
