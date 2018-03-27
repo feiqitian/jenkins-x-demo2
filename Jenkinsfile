@@ -45,10 +45,8 @@ pipeline {
           container('maven') {
             // ensure we're not on a detached head
             sh "git checkout master"
-            sh "git config credential.https://github.com.username \$GIT_USERNAME"
-            sh "ls -lash ~"
-            sh "cat ~/git/credentials"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
+            sh "git config --global core.askpass ~/git/credentials"
             sh "git config --global credential.helper store"
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
