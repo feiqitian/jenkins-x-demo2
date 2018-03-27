@@ -45,7 +45,7 @@ pipeline {
             // ensure we're not on a detached head
             sh "git checkout master"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
-            sh "git config --global credential.helper store --file ~/git/credentials"
+            sh "git config --global credential.helper store --file=~/git/credentials"
             sh "echo ~/git/credentials"
             sh "cat ~/git/credentials"
             // so we can retrieve the version in later steps
