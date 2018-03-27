@@ -45,9 +45,9 @@ pipeline {
           container('maven') {
             // ensure we're not on a detached head
             sh "git checkout master"
-            sh "git config credential.https://github.com.username feiqitian@gmail.com"
-            sh "echo "
-            echo "\$GIT_API_TOKEN"
+            sh "git config credential.https://github.com.username \$GIT_USERNAME"
+            sh "echo \$GIT_API_TOKEN"
+            echo "$GIT_API_TOKEN"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
             sh "git config --global credential.helper store"
             // so we can retrieve the version in later steps
