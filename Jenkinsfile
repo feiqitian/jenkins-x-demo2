@@ -9,7 +9,6 @@ pipeline {
       CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
       GIT_USERNAME      = "$GIT_CREDS_USR"
       GIT_API_TOKEN     = "$GIT_CREDS_PSW"
-      XDG_CONFIG_HOME   = "~"
     }
     stages {
       stage('CI Build and push snapshot') {
@@ -47,6 +46,8 @@ pipeline {
             sh "git checkout master"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
             sh "git config --global credential.helper store"
+            sh "echo \$GIT_ASKPASS"
+            sh "cat \$GIT_ASKPASS"
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
