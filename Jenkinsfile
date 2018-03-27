@@ -45,6 +45,7 @@ pipeline {
             // ensure we're not on a detached head
             sh "git checkout master"
             sh "git config credential.https://github.com.username feiqitian@gmail.com"
+            sh "git config credential.https://github.com.password \$GIT_API_TOKEN"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
             sh "git config --global credential.helper store"
             // so we can retrieve the version in later steps
